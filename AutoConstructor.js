@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name                Auto Constructor
 // @version             1.0
-// @description         Constrio edificios no TribalWars de acordo com a fila montada
+// @description         Constrio edificios no TribalWars de acordo com a fila definida
 // @author              Igor Martins
 // @include             http*://*.*game.php?village=*&screen=overview_villages
 // @include             http*://*.*game.php?village=*&screen=main
