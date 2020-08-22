@@ -3,13 +3,7 @@
 // @version             1.0
 // @description         Constrio edificios no TribalWars de acordo com a fila definida
 // @author              Igor Martins
-// @include             http*://*.*game.php?village=*&screen=overview_villages
 // @include             http*://*.*game.php?village=*&screen=main
-// @grant               GM_getResourceText
-// @grant               GM_addStyle
-// @grant               GM_getValue
-// @grant               unsafeWindow
-// @require             http://code.jquery.com/jquery-1.12.4.min.js
 // ==/UserScript==
 
 /*##############################################
@@ -24,15 +18,10 @@ https://forum.tribalwars.com.br/index.php?threads/os-5-primeiros-dias-modo-novat
 // Escolha Tempo de espera mínimo e máximo entre ações (em milissegundos)
 const Min_Tempo_Espera = 800;
 const Max_Tempo_Espera = 2500;
-
 // Escolha se você deseja que o bot enfileire os edifícios na ordem definida (= true) ou
 // assim que um prédio estiver disponível para a fila de construção (= false)
 const Construção_Edificios_Ordem = true;
-
 //*************************** /CONFIGURAÇÃO ***************************//
-// Constantes (NÃO DEVE SER ALTERADAS)
-const Visualização_Geral = "OVERVIEW_VIEW";
-const Edificio_Principal = "HEADQUARTERS_VIEW";
 
 setInterval(function() {
     var text = "";
@@ -46,33 +35,10 @@ setInterval(function() {
     }
     //missao concluida
     $('[class="btn btn-confirm-yes"]').click();
-}, 500);
+}, 1000);
 
 let delay = Math.floor(Math.random() * (Max_Tempo_Espera - Max_Tempo_Espera) + Min_Tempo_Espera);
-// Ação do processo
-let Evoluir_vilas = getEvoluir_vilas();
-console.log(Evoluir_vilas);
-setTimeout(function() {
-    if (Evoluir_vilas == Edificio_Principal) {
-        // construir qualquer edificio custeável, se possível
-        Proxima_Construção();
-
-    } else if (Evoluir_vilas == Visualização_Geral && document.getElementById("main_layout") !== undefined) {
-        // Visualização Geral Pag
-        document.getElementById("main_layout").children[0].children[0].click();
-    }
-}, delay);
-
-function getEvoluir_vilas() {
-    let currentUrl = window.location.href;
-    if (currentUrl.endsWith('overview_villages')) {
-        return Visualização_Geral;
-    } else if (currentUrl.endsWith('main')) {
-        return Edificio_Principal;
-    }
-}
-
-function Proxima_Construção() {
+setInterval(function() {
     let Construção_proximo_edificio = getConstrução_proximo_edificio();
     if (Construção_proximo_edificio !== undefined) {
         if (document.getElementById("buildqueue") == null || document.getElementById("buildqueue").rows.length < 6) {
@@ -80,7 +46,7 @@ function Proxima_Construção() {
             console.log("Clicked on " + Construção_proximo_edificio);
         }
     }
-}
+}, delay);
 
 function getConstrução_proximo_edificio() {
     let Clicar_Upar_Edificos = document.getElementsByClassName("btn btn-build");
@@ -396,26 +362,26 @@ function getConstrução_Edifcios_Serie() {
     Sequência_Construção.push("main_buildlink_stable_6");
     // Construção Estabulo 4
     Sequência_Construção.push("main_buildlink_stable_7");
+    // Construção Fazenda 15
+    Sequência_Construção.push("main_buildlink_farm_15");
     // Construção Armazém 18
     Sequência_Construção.push("main_buildlink_storage_18");
     // Construção Armazém 19
     Sequência_Construção.push("main_buildlink_storage_19");
+    // Construção Fazenda 16
+    Sequência_Construção.push("main_buildlink_farm_16");
     // Construção Quartel 11
     Sequência_Construção.push("main_buildlink_barracks_11");
     // Construção Quartel 12
     Sequência_Construção.push("main_buildlink_barracks_12");
+    // Construção Fazenda 17
+    Sequência_Construção.push("main_buildlink_farm_17");
     // Construção Ferro 15
     Sequência_Construção.push("main_buildlink_iron_15");
     // Construção Ferro 16
     Sequência_Construção.push("main_buildlink_iron_16");
-    // Construção Fazenda 15
-    Sequência_Construção.push("main_buildlink_farm_15");
-    // Construção Fazenda 16
-    Sequência_Construção.push("main_buildlink_farm_16");
     // Construção Muralha 10
     Sequência_Construção.push("main_buildlink_wall_10");
-    // Construção Fazenda 17
-    Sequência_Construção.push("main_buildlink_farm_17");
     // Construção Ferreiro 11
     Sequência_Construção.push("main_buildlink_smith_11");
     // Construção Muralha 11
@@ -424,6 +390,8 @@ function getConstrução_Edifcios_Serie() {
     Sequência_Construção.push("main_buildlink_farm_18");
     // Construção Muralha 12
     Sequência_Construção.push("main_buildlink_wall_12");
+    // Construção Fazenda 19
+    Sequência_Construção.push("main_buildlink_farm_19");
     // Construção Mercado 7
     Sequência_Construção.push("main_buildlink_market_7");
     // Construção Mercado 8
@@ -434,6 +402,8 @@ function getConstrução_Edifcios_Serie() {
     Sequência_Construção.push("main_buildlink_smith_12");
     // Construção Mercado 10
     Sequência_Construção.push("main_buildlink_market_10");
+    // Construção Fazenda 20
+    Sequência_Construção.push("main_buildlink_farm_20");
     // Construção Madeira 18
     Sequência_Construção.push("main_buildlink_wood_18");
     // Construção Argila 18
@@ -444,8 +414,6 @@ function getConstrução_Edifcios_Serie() {
     Sequência_Construção.push("main_buildlink_wood_19");
     // Construção Argila 19
     Sequência_Construção.push("main_buildlink_stone_19");
-    // Construção Fazenda 19
-    Sequência_Construção.push("main_buildlink_farm_19");
     // Construção Ferreiro 14
     Sequência_Construção.push("main_buildlink_smith_14");
     // Construção Muralha 13
@@ -464,6 +432,8 @@ function getConstrução_Edifcios_Serie() {
     Sequência_Construção.push("main_buildlink_main_19");
     // Construção Edificio Principal 20
     Sequência_Construção.push("main_buildlink_main_20");
+    // Construção Fazenda 21
+    Sequência_Construção.push("main_buildlink_farm_21");
     // Construção Armazém 20
     Sequência_Construção.push("main_buildlink_storage_20");
     // Construção Armazém 21
@@ -474,6 +444,8 @@ function getConstrução_Edifcios_Serie() {
     Sequência_Construção.push("main_buildlink_storage_23");
     // Construção Madeira 20
     Sequência_Construção.push("main_buildlink_wood_20");
+    // Construção Fazenda 22
+    Sequência_Construção.push("main_buildlink_farm_22");
     // Construção Argila 20
     Sequência_Construção.push("main_buildlink_stone_20");
     // Construção Ferreiro 16
@@ -488,6 +460,8 @@ function getConstrução_Edifcios_Serie() {
     Sequência_Construção.push("main_buildlink_smith_20");
     // Construção Academia
     Sequência_Construção.push("main_buildlink_snob_1");
+    // Construção Fazenda 23
+    Sequência_Construção.push("main_buildlink_farm_23");
     // Construção Ferro 18
     Sequência_Construção.push("main_buildlink_iron_18");
     // Construção Madeira 20
@@ -506,16 +480,14 @@ function getConstrução_Edifcios_Serie() {
     Sequência_Construção.push("main_buildlink_garage_5");
     // Construção Estabulo 9
     Sequência_Construção.push("main_buildlink_stable_9");
-    // Construção Fazenda 20
-    Sequência_Construção.push("main_buildlink_farm_20");
     // Construção Muralha 14
     Sequência_Construção.push("main_buildlink_wall_14");
     // Construção Muralha 15
     Sequência_Construção.push("main_buildlink_wall_15");
-    // Construção Fazenda 21
-    Sequência_Construção.push("main_buildlink_farm_21");
     // Construção Armazém 24
     Sequência_Construção.push("main_buildlink_storage_24");
+    // Construção Fazenda 24
+    Sequência_Construção.push("main_buildlink_farm_24");
     // Construção Ferro 19
     Sequência_Construção.push("main_buildlink_iron_19");
     // Construção Madeira 21
@@ -526,6 +498,8 @@ function getConstrução_Edifcios_Serie() {
     Sequência_Construção.push("main_buildlink_wood_22");
     // Construção Argila 22
     Sequência_Construção.push("main_buildlink_stone_22");
+    // Construção Fazenda 25
+    Sequência_Construção.push("main_buildlink_farm_25");
     // Construção Armazém 25
     Sequência_Construção.push("main_buildlink_storage_25");
     // Construção Madeira 23
@@ -548,8 +522,6 @@ function getConstrução_Edifcios_Serie() {
     Sequência_Construção.push("main_buildlink_barracks_15");
     // Construção Quartel 16
     Sequência_Construção.push("main_buildlink_barracks_16");
-    // Construção Fazenda 22
-    Sequência_Construção.push("main_buildlink_farm_22");
     // Construção Madeira 24
     Sequência_Construção.push("main_buildlink_wood_24");
     // Construção Argila 24
@@ -568,12 +540,6 @@ function getConstrução_Edifcios_Serie() {
     Sequência_Construção.push("main_buildlink_wall_17");
     // Construção Muralha 18
     Sequência_Construção.push("main_buildlink_wall_18");
-    // Construção Fazenda 23
-    Sequência_Construção.push("main_buildlink_farm_23");
-    // Construção Fazenda 24
-    Sequência_Construção.push("main_buildlink_farm_24");
-    // Construção Fazenda 25
-    Sequência_Construção.push("main_buildlink_farm_25");
     // Construção Mercado 11
     Sequência_Construção.push("main_buildlink_market_11");
     // Construção Mercado 12
