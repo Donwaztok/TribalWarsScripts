@@ -512,8 +512,6 @@ function getConstrução_Edifcios_Serie() {
     Sequência_Construção.push("main_buildlink_iron_21");
     // Construção Ferro 22
     Sequência_Construção.push("main_buildlink_iron_22");
-    // Construção Oficina 6
-    Sequência_Construção.push("main_buildlink_garage_6");
     // Construção Estabulo 10
     Sequência_Construção.push("main_buildlink_stable_10");
     // Construção Estabulo 11
@@ -574,30 +572,6 @@ function getConstrução_Edifcios_Serie() {
     Sequência_Construção.push("main_buildlink_farm_27");
     // Construção Fazenda 28
     Sequência_Construção.push("main_buildlink_farm_28");
-    // Construção Fazenda 29
-    Sequência_Construção.push("main_buildlink_farm_29");
-    // Construção Fazenda 30
-    Sequência_Construção.push("main_buildlink_farm_30");
-    // Construção Oficina 7
-    Sequência_Construção.push("main_buildlink_garage_7");
-    // Construção Estabulo 12
-    Sequência_Construção.push("main_buildlink_stable_12");
-    // Construção Oficina 8
-    Sequência_Construção.push("main_buildlink_garage_8");
-    // Construção Estabulo 13
-    Sequência_Construção.push("main_buildlink_stable_13");
-    // Construção Edificio Principal 21
-    Sequência_Construção.push("main_buildlink_main_21");
-    // Construção Oficina 9
-    Sequência_Construção.push("main_buildlink_garage_9");
-    // Construção Estabulo 14
-    Sequência_Construção.push("main_buildlink_stable_14");
-    // Construção Edificio Principal 22
-    Sequência_Construção.push("main_buildlink_main_22");
-    // Construção Oficina 10
-    Sequência_Construção.push("main_buildlink_garage_10");
-    // Construção Estabulo 15
-    Sequência_Construção.push("main_buildlink_stable_15");
     // Construção Quartel 17
     Sequência_Construção.push("main_buildlink_barracks_17");
     // Construção Quartel 18
@@ -606,6 +580,18 @@ function getConstrução_Edifcios_Serie() {
     Sequência_Construção.push("main_buildlink_barracks_19");
     // Construção Quartel 20
     Sequência_Construção.push("main_buildlink_barracks_20");
+    // Construção Fazenda 29
+    Sequência_Construção.push("main_buildlink_farm_29");
+    // Construção Estabulo 12
+    Sequência_Construção.push("main_buildlink_stable_12");
+    // Construção Estabulo 13
+    Sequência_Construção.push("main_buildlink_stable_13");
+    // Construção Estabulo 14
+    Sequência_Construção.push("main_buildlink_stable_14");
+    // Construção Estabulo 15
+    Sequência_Construção.push("main_buildlink_stable_15");
+    // Construção Fazenda 30
+    Sequência_Construção.push("main_buildlink_farm_30");
     // Construção Madeira 27
     Sequência_Construção.push("main_buildlink_wood_27");
     // Construção Argila 27
@@ -648,26 +634,29 @@ function getConstrução_Edifcios_Serie() {
     Sequência_Construção.push("main_buildlink_market_17");
     // Construção Quartel 25
     Sequência_Construção.push("main_buildlink_barracks_25");
-    // Construção Oficina 10
-    Sequência_Construção.push("main_buildlink_garage_11");
-    // Construção Estabulo 15
+    // Construção Estabulo 16
     Sequência_Construção.push("main_buildlink_stable_16");
-    // Construção Oficina 10
-    Sequência_Construção.push("main_buildlink_garage_12");
-    // Construção Estabulo 15
+    // Construção Estabulo 17
     Sequência_Construção.push("main_buildlink_stable_17");
-    // Construção Oficina 10
-    Sequência_Construção.push("main_buildlink_garage_13");
-    // Construção Estabulo 15
+    // Construção Estabulo 18
     Sequência_Construção.push("main_buildlink_stable_18");
-    // Construção Oficina 10
-    Sequência_Construção.push("main_buildlink_garage_14");
-    // Construção Estabulo 15
+    // Construção Estabulo 19
     Sequência_Construção.push("main_buildlink_stable_19");
-    // Construção Oficina 10
-    Sequência_Construção.push("main_buildlink_garage_15");
-    // Construção Estabulo 15
+    // Construção Estabulo 20
     Sequência_Construção.push("main_buildlink_stable_20");
+    
+    // === Desnecessário ===
+
+    // Construção Mercado 18
+    Sequência_Construção.push("main_buildlink_market_18");
+    // Construção Mercado 19
+    Sequência_Construção.push("main_buildlink_market_19");
+    // Construção Mercado 20
+    Sequência_Construção.push("main_buildlink_market_20");
+    // Construção Edificio Principal 21
+    Sequência_Construção.push("main_buildlink_main_21");
+    // Construção Edificio Principal 22
+    Sequência_Construção.push("main_buildlink_main_22");
     // Construção Edificio Principal 23
     Sequência_Construção.push("main_buildlink_main_23");
     // Construção Edificio Principal 24
@@ -684,12 +673,6 @@ function getConstrução_Edifcios_Serie() {
     Sequência_Construção.push("main_buildlink_main_29");
     // Construção Edificio Principal 30
     Sequência_Construção.push("main_buildlink_main_30");
-    // Construção Mercado 18
-    Sequência_Construção.push("main_buildlink_market_18");
-    // Construção Mercado 19
-    Sequência_Construção.push("main_buildlink_market_19");
-    // Construção Mercado 20
-    Sequência_Construção.push("main_buildlink_market_20");
     // Construção Mercado 21
     Sequência_Construção.push("main_buildlink_market_21");
     // Construção Mercado 22
@@ -714,6 +697,26 @@ function getConstrução_Edifcios_Serie() {
     Sequência_Construção.push("main_buildlink_hide_9");
     // Construção Esconderijo 10
     Sequência_Construção.push("main_buildlink_hide_10");
-
+    // Construção Oficina 6
+    Sequência_Construção.push("main_buildlink_garage_6");
+    // Construção Oficina 7
+    Sequência_Construção.push("main_buildlink_garage_7");
+    // Construção Oficina 8
+    Sequência_Construção.push("main_buildlink_garage_8");
+    // Construção Oficina 9
+    Sequência_Construção.push("main_buildlink_garage_9");
+    // Construção Oficina 10
+    Sequência_Construção.push("main_buildlink_garage_10");
+    // Construção Oficina 11
+    Sequência_Construção.push("main_buildlink_garage_11");
+    // Construção Oficina 12
+    Sequência_Construção.push("main_buildlink_garage_12");
+    // Construção Oficina 13
+    Sequência_Construção.push("main_buildlink_garage_13");
+    // Construção Oficina 14
+    Sequência_Construção.push("main_buildlink_garage_14");
+    // Construção Oficina 15
+    Sequência_Construção.push("main_buildlink_garage_15");
+    
     return Sequência_Construção;
 }
