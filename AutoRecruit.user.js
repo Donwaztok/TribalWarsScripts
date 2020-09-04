@@ -15,7 +15,7 @@ var recarregarPagina = minAleatorio(40, 120); // Min
 
 // Adicione o id das suas vilas (Encontradas na URL /game.php?village=<****>&screen=overview) separados por virgula ["0001", "0002"]
 var ataque = ["9837","16353"];
-var defesa = ["9901","1625"];
+var defesa = ["9901","1625","337"];
 
 // Adicionar a quantidade de tropas deseja para unidade e o tipo da aldeia
 // 0 significa que a tropa não será recrutada
@@ -81,14 +81,14 @@ $(document).ready(setInterval(function () {
 function validarPreencher(singleObject, village) {
     if ("Ataque" == (village)) {
         if (singleObject.recrutarAtt > 0) {
-            if ($(singleObject.cssClassSelector).length <= 0) {
+            if ($(singleObject.cssClassSelector).length <= 1) {
                 $("input[name=" + singleObject.nomeUnidade + "]").val(singleObject.recrutarAtt);
                 return true;
             }
         }
     } else if ("Defesa" == (village)) {
         if (singleObject.recrutarDef > 0) {
-            if ($(singleObject.cssClassSelector).length <= 0) {
+            if ($(singleObject.cssClassSelector).length <= 1) {
                 $("input[name=" + singleObject.nomeUnidade + "]").val(singleObject.recrutarDef);
                 return true;
             }
