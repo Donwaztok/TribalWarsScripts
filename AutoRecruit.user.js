@@ -12,11 +12,11 @@
 // ======== Config ========
 //Time to: (min time, max time (in minutes))
 var verifyTroops = timeBetween(0.5, 1); // Min
-var reloadPage = 10; // Min
+var reloadPage = timeBetween(5, 10); // Min
 
 // Add the ID of village (found in URL /game.php?village=<****>&screen=overview) separeted by "," e.g.: ["0001", "0002"]
-var attack = ["9837","16353","9263"];
-var defense = ["9901","1625","2639","5794"];
+var attack = ["9837", "16353", "9263"];
+var defense = ["9901", "1625", "2639", "5794"];
 
 // How many troops to add in queue
 // 0 means that you dont want that troop
@@ -37,8 +37,6 @@ function createTroops() {
     ];
 }
 // ======== Config ========
-
-var timeoutReload = 0;
 
 var classEnum = Object.freeze({
     lanca: ".unit_sprite_smaller.spear",
@@ -111,12 +109,7 @@ function pular_aldeia() {
     if ($(document).find("#village_switch_right").get()["0"]) {
         jQuery.event.trigger({ type: 'keydown', which: 68 });
     } else {
-        timeoutReload++;
-        if (timeoutReload == reloadPage) {
-            location.reload();
-            timeoutReload = 0;
-        }
-        setTimeout(pular_aldeia, 60000);
+        location.reload();
     }
 }
-setTimeout(pular_aldeia, 60000);
+setTimeout(pular_aldeia, reloadPage);
