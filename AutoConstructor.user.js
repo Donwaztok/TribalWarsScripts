@@ -1,29 +1,30 @@
 // ==UserScript==
 // @name                Auto Constructor
 // @version             1.0
-// @description         Constrio edificios no TribalWars de acordo com a fila definida
+// @description         Automatic build for villages
 // @author              Igor Martins
 // @include             http*://*.*game.php?village=*&screen=main
 // ==/UserScript==
 
 /*##############################################
-Logica inicial de Programação obtida, atraves de um tutorial
-      Denominado "Os 5 primeiros dias - Modo Novato"
-              Imagens Também do Mesmo
-                 Autoria : senson
+Based in
 https://forum.tribalwars.com.br/index.php?threads/os-5-primeiros-dias-modo-novato.334845/#post-3677800
 ##############################################*/
 
-//*************************** CONFIGURAÇÃO ***************************//
-// Escolha Tempo de espera mínimo e máximo entre ações (em milissegundos)
-const Min_Tempo_Espera = 800;
-const Max_Tempo_Espera = 2500;
-// Escolha se você deseja que o bot enfileire os edifícios na ordem definida (= true) ou
-// assim que um prédio estiver disponível para a fila de construção (= false)
-const Construção_Edificios_Ordem = true;
-//*************************** /CONFIGURAÇÃO ***************************//
+//*************************** Config ***************************//
+// Time between actions (em milissegundos)
+const minTime = 800;
+const maxTime = 2500;
+// Change the current village or reload page (in minutes)
+const reloadPage = 10;
+// move to new village?
+const moveVillage = true;
+// True = wait for resources to build in order
+// False = queue the first available build
+const orderedBuild = true;
+//*************************** Config ***************************//
 
-setInterval(function() {
+setInterval(function () {
     var text = "";
     var tr = $('[id="buildqueue"]').find('tr').eq(1);
     text = tr.find('td').eq(1).find('span').eq(0).text().split(" ").join("").split("\n").join("");
@@ -37,11 +38,11 @@ setInterval(function() {
     $('[class="btn btn-confirm-yes"]').click();
 }, 1000);
 
-let delay = Math.floor(Math.random() * (Max_Tempo_Espera - Max_Tempo_Espera) + Min_Tempo_Espera);
-setInterval(function() {
+let delay = Math.floor(Math.random() * (maxTime - minTime) + minTime);
+setInterval(function () {
     let Construção_proximo_edificio = getConstrução_proximo_edificio();
     if (Construção_proximo_edificio !== undefined) {
-        if (document.getElementById("buildqueue") == null || document.getElementById("buildqueue").rows.length < 6) {
+        if (document.getElementById("buildqueue") == null || document.getElementById("buildqueue").rows.length < 7) {
             Construção_proximo_edificio.click();
             console.log("Clicked on " + Construção_proximo_edificio);
         }
@@ -60,13 +61,22 @@ function getConstrução_proximo_edificio() {
             if (Visivel) {
                 instituir = próximo_edifício;
             }
-            if (Construção_Edificios_Ordem) {
+            if (orderedBuild) {
                 break;
             }
         }
     }
     return instituir;
 }
+
+function pular_aldeia() {
+    if ($(document).find("#village_switch_right").get()["0"] && moveVillage) {
+        jQuery.event.trigger({ type: 'keydown', which: 68 });
+    } else {
+        location.reload();
+    }
+}
+setTimeout(pular_aldeia, 60000 * reloadPage);
 
 function getConstrução_Edifcios_Serie() {
     var Sequência_Construção = [];
@@ -572,16 +582,10 @@ function getConstrução_Edifcios_Serie() {
     Sequência_Construção.push("main_buildlink_farm_27");
     // Construção Fazenda 28
     Sequência_Construção.push("main_buildlink_farm_28");
-    // Construção Quartel 17
-    Sequência_Construção.push("main_buildlink_barracks_17");
-    // Construção Quartel 18
-    Sequência_Construção.push("main_buildlink_barracks_18");
-    // Construção Quartel 19
-    Sequência_Construção.push("main_buildlink_barracks_19");
-    // Construção Quartel 20
-    Sequência_Construção.push("main_buildlink_barracks_20");
     // Construção Fazenda 29
     Sequência_Construção.push("main_buildlink_farm_29");
+    // Construção Fazenda 30
+    Sequência_Construção.push("main_buildlink_farm_30");
     // Construção Estabulo 12
     Sequência_Construção.push("main_buildlink_stable_12");
     // Construção Estabulo 13
@@ -590,8 +594,14 @@ function getConstrução_Edifcios_Serie() {
     Sequência_Construção.push("main_buildlink_stable_14");
     // Construção Estabulo 15
     Sequência_Construção.push("main_buildlink_stable_15");
-    // Construção Fazenda 30
-    Sequência_Construção.push("main_buildlink_farm_30");
+    // Construção Quartel 17
+    Sequência_Construção.push("main_buildlink_barracks_17");
+    // Construção Quartel 18
+    Sequência_Construção.push("main_buildlink_barracks_18");
+    // Construção Quartel 19
+    Sequência_Construção.push("main_buildlink_barracks_19");
+    // Construção Quartel 20
+    Sequência_Construção.push("main_buildlink_barracks_20");
     // Construção Madeira 27
     Sequência_Construção.push("main_buildlink_wood_27");
     // Construção Argila 27
@@ -626,97 +636,97 @@ function getConstrução_Edifcios_Serie() {
     Sequência_Construção.push("main_buildlink_iron_30");
     // Construção Mercado 15
     Sequência_Construção.push("main_buildlink_market_15");
-    // Construção Mercado 16
-    Sequência_Construção.push("main_buildlink_market_16");
     // Construção Quartel 24
     Sequência_Construção.push("main_buildlink_barracks_24");
-    // Construção Mercado 17
-    Sequência_Construção.push("main_buildlink_market_17");
     // Construção Quartel 25
     Sequência_Construção.push("main_buildlink_barracks_25");
-    // Construção Estabulo 16
+    // Construção Estabulo 15
     Sequência_Construção.push("main_buildlink_stable_16");
-    // Construção Estabulo 17
+    // Construção Estabulo 15
     Sequência_Construção.push("main_buildlink_stable_17");
-    // Construção Estabulo 18
+    // Construção Estabulo 15
     Sequência_Construção.push("main_buildlink_stable_18");
-    // Construção Estabulo 19
+    // Construção Estabulo 15
     Sequência_Construção.push("main_buildlink_stable_19");
-    // Construção Estabulo 20
+    // Construção Estabulo 15
     Sequência_Construção.push("main_buildlink_stable_20");
-    
+
     // === Desnecessário ===
 
+    // Construção Mercado 16
+    //Sequência_Construção.push("main_buildlink_market_16");
+    // Construção Mercado 17
+    //Sequência_Construção.push("main_buildlink_market_17");
     // Construção Mercado 18
-    Sequência_Construção.push("main_buildlink_market_18");
+    //Sequência_Construção.push("main_buildlink_market_18");
     // Construção Mercado 19
-    Sequência_Construção.push("main_buildlink_market_19");
+    //Sequência_Construção.push("main_buildlink_market_19");
     // Construção Mercado 20
-    Sequência_Construção.push("main_buildlink_market_20");
+    //Sequência_Construção.push("main_buildlink_market_20");
     // Construção Edificio Principal 21
-    Sequência_Construção.push("main_buildlink_main_21");
+    //Sequência_Construção.push("main_buildlink_main_21");
     // Construção Edificio Principal 22
-    Sequência_Construção.push("main_buildlink_main_22");
+    //Sequência_Construção.push("main_buildlink_main_22");
     // Construção Edificio Principal 23
-    Sequência_Construção.push("main_buildlink_main_23");
+    //Sequência_Construção.push("main_buildlink_main_23");
     // Construção Edificio Principal 24
-    Sequência_Construção.push("main_buildlink_main_24");
+    //Sequência_Construção.push("main_buildlink_main_24");
     // Construção Edificio Principal 25
-    Sequência_Construção.push("main_buildlink_main_25");
+    //Sequência_Construção.push("main_buildlink_main_25");
     // Construção Edificio Principal 26
-    Sequência_Construção.push("main_buildlink_main_26");
+    //Sequência_Construção.push("main_buildlink_main_26");
     // Construção Edificio Principal 27
-    Sequência_Construção.push("main_buildlink_main_27");
+    //Sequência_Construção.push("main_buildlink_main_27");
     // Construção Edificio Principal 28
-    Sequência_Construção.push("main_buildlink_main_28");
+    //Sequência_Construção.push("main_buildlink_main_28");
     // Construção Edificio Principal 29
-    Sequência_Construção.push("main_buildlink_main_29");
+    //Sequência_Construção.push("main_buildlink_main_29");
     // Construção Edificio Principal 30
-    Sequência_Construção.push("main_buildlink_main_30");
+    //Sequência_Construção.push("main_buildlink_main_30");
     // Construção Mercado 21
-    Sequência_Construção.push("main_buildlink_market_21");
+    //Sequência_Construção.push("main_buildlink_market_21");
     // Construção Mercado 22
-    Sequência_Construção.push("main_buildlink_market_22");
+    //Sequência_Construção.push("main_buildlink_market_22");
     // Construção Esconderijo 4
-    Sequência_Construção.push("main_buildlink_hide_4");
+    //Sequência_Construção.push("main_buildlink_hide_4");
     // Construção Mercado 23
-    Sequência_Construção.push("main_buildlink_market_23");
+    //Sequência_Construção.push("main_buildlink_market_23");
     // Construção Esconderijo 5
-    Sequência_Construção.push("main_buildlink_hide_5");
+    //Sequência_Construção.push("main_buildlink_hide_5");
     // Construção Mercado 24
-    Sequência_Construção.push("main_buildlink_market_24");
+    //Sequência_Construção.push("main_buildlink_market_24");
     // Construção Mercado 25
-    Sequência_Construção.push("main_buildlink_market_25");
+    //Sequência_Construção.push("main_buildlink_market_25");
     // Construção Esconderijo 3
-    Sequência_Construção.push("main_buildlink_hide_6");
+    //Sequência_Construção.push("main_buildlink_hide_6");
     // Construção Esconderijo 3
-    Sequência_Construção.push("main_buildlink_hide_7");
+    //Sequência_Construção.push("main_buildlink_hide_7");
     // Construção Esconderijo 8
-    Sequência_Construção.push("main_buildlink_hide_8");
+    //Sequência_Construção.push("main_buildlink_hide_8");
     // Construção Esconderijo 9
-    Sequência_Construção.push("main_buildlink_hide_9");
+    //Sequência_Construção.push("main_buildlink_hide_9");
     // Construção Esconderijo 10
-    Sequência_Construção.push("main_buildlink_hide_10");
+    //Sequência_Construção.push("main_buildlink_hide_10");
     // Construção Oficina 6
-    Sequência_Construção.push("main_buildlink_garage_6");
+    //Sequência_Construção.push("main_buildlink_garage_6");
     // Construção Oficina 7
-    Sequência_Construção.push("main_buildlink_garage_7");
+    //Sequência_Construção.push("main_buildlink_garage_7");
     // Construção Oficina 8
-    Sequência_Construção.push("main_buildlink_garage_8");
+    //Sequência_Construção.push("main_buildlink_garage_8");
     // Construção Oficina 9
-    Sequência_Construção.push("main_buildlink_garage_9");
+    //Sequência_Construção.push("main_buildlink_garage_9");
     // Construção Oficina 10
-    Sequência_Construção.push("main_buildlink_garage_10");
+    //Sequência_Construção.push("main_buildlink_garage_10");
     // Construção Oficina 11
-    Sequência_Construção.push("main_buildlink_garage_11");
+    //Sequência_Construção.push("main_buildlink_garage_11");
     // Construção Oficina 12
-    Sequência_Construção.push("main_buildlink_garage_12");
+    //Sequência_Construção.push("main_buildlink_garage_12");
     // Construção Oficina 13
-    Sequência_Construção.push("main_buildlink_garage_13");
+    //Sequência_Construção.push("main_buildlink_garage_13");
     // Construção Oficina 14
-    Sequência_Construção.push("main_buildlink_garage_14");
+    //Sequência_Construção.push("main_buildlink_garage_14");
     // Construção Oficina 15
-    Sequência_Construção.push("main_buildlink_garage_15");
-    
+    //Sequência_Construção.push("main_buildlink_garage_15");
+
     return Sequência_Construção;
 }

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Auto Recruit
 // @version      1.0
-// @description  Mantém a fila de recrutamento cheia no TribalWars
+// @description  Queue troops
 // @author       Igor Martins
 // @include     https://*&screen=train*
 // @include     https://*&screen=barracks*
@@ -9,33 +9,36 @@
 // @include     https://*&screen=garage*
 // ==/UserScript==
 
-// ======== CONFIGURAÇÃO ========
-var verificarTropas = minAleatorio(0.5, 1); // Min
-var recarregarPagina = minAleatorio(40, 120); // Min
+// ======== Config ========
+//Time to: (min time, max time (in minutes))
+var verifyTroops = timeBetween(0.5, 1); // Min
+var reloadPage = 10; // Min
 
-// Adicione o id das suas vilas (Encontradas na URL /game.php?village=<****>&screen=overview) separados por virgula ["0001", "0002"]
-var ataque = ["9837","16353"];
-var defesa = ["9901","1625","337"];
+// Add the ID of village (found in URL /game.php?village=<****>&screen=overview) separeted by "," e.g.: ["0001", "0002"]
+var attack = ["9837","16353","9263"];
+var defense = ["9901","1625","2639","5794"];
 
-// Adicionar a quantidade de tropas deseja para unidade e o tipo da aldeia
-// 0 significa que a tropa não será recrutada
-// 1 ou mais significa que a tropa será recrutada na quantidade selecionada
-var objetoTropas = [];
-function geraTropas() {
-    objetoTropas = [
-        { nomeUnidade: "spear", recrutarAtt: 0, recrutarDef: 10, cssClassSelector: classEnum.lanca },
-        { nomeUnidade: "sword", recrutarAtt: 0, recrutarDef: 10, cssClassSelector: classEnum.espada },
-        { nomeUnidade: "axe", recrutarAtt: 10, recrutarDef: 0, cssClassSelector: classEnum.barbaro },
-        { nomeUnidade: "archer", recrutarAtt: 0, recrutarDef: 5, cssClassSelector: classEnum.arqueiro },
-        { nomeUnidade: "spy", recrutarAtt: 1, recrutarDef: 0, cssClassSelector: classEnum.explorador },
-        { nomeUnidade: "light", recrutarAtt: 5, recrutarDef: 0, cssClassSelector: classEnum.cavalariaLeve },
-        { nomeUnidade: "marcher", recrutarAtt: 0, recrutarDef: 0, cssClassSelector: classEnum.cavalariaArco },
-        { nomeUnidade: "heavy", recrutarAtt: 0, recrutarDef: 0, cssClassSelector: classEnum.cavalariaPesada },
-        { nomeUnidade: "ram", recrutarAtt: 0, recrutarDef: 0, cssClassSelector: classEnum.ariete },
-        { nomeUnidade: "catapult", recrutarAtt: 0, recrutarDef: 0, cssClassSelector: classEnum.catapulta }
+// How many troops to add in queue
+// 0 means that you dont want that troop
+// 1+ means that troop will be added into queue the quantity selectec
+var troops = [];
+function createTroops() {
+    troops = [
+        { unitName: "spear", recruitAtt: 0, recruitDef: 300, cssClassSelector: classEnum.lanca },
+        { unitName: "sword", recruitAtt: 0, recruitDef: 300, cssClassSelector: classEnum.espada },
+        { unitName: "axe", recruitAtt: 300, recruitDef: 0, cssClassSelector: classEnum.barbaro },
+        { unitName: "archer", recruitAtt: 0, recruitDef: 100, cssClassSelector: classEnum.arqueiro },
+        { unitName: "spy", recruitAtt: 0, recruitDef: 0, cssClassSelector: classEnum.explorador },
+        { unitName: "light", recruitAtt: 150, recruitDef: 0, cssClassSelector: classEnum.cavalariaLeve },
+        { unitName: "marcher", recruitAtt: 0, recruitDef: 0, cssClassSelector: classEnum.cavalariaArco },
+        { unitName: "heavy", recruitAtt: 0, recruitDef: 1, cssClassSelector: classEnum.cavalariaPesada },
+        { unitName: "ram", recruitAtt: 0, recruitDef: 0, cssClassSelector: classEnum.ariete },
+        { unitName: "catapult", recruitAtt: 0, recruitDef: 0, cssClassSelector: classEnum.catapulta }
     ];
 }
-// ======== CONFIGURAÇÃO ========
+// ======== Config ========
+
+var timeoutReload = 0;
 
 var classEnum = Object.freeze({
     lanca: ".unit_sprite_smaller.spear",
@@ -55,18 +58,18 @@ $(document).ready(setInterval(function () {
     const urlParams = new URLSearchParams(queryString);
     const village = urlParams.get('village')
     var tipoVillage;
-    if (ataque.includes(village)) {
-        console.log("Verificando Tropas [" + village + "] - Ataque");
-        tipoVillage = "Ataque";
-    } else if (defesa.includes(village)) {
-        console.log("Verificando Tropas [" + village + "] - Defesa");
-        tipoVillage = "Defesa";
+    if (attack.includes(village)) {
+        console.log("Verificando Tropas [" + village + "] - attack");
+        tipoVillage = "attack";
+    } else if (defense.includes(village)) {
+        console.log("Verificando Tropas [" + village + "] - defense");
+        tipoVillage = "defense";
     } else {
         console.log("[" + village + "] - Aldeia não configurada. Não recrutando!");
     }
 
     var retorno = false;
-    objetoTropas.forEach(element => {
+    troops.forEach(element => {
         var response = validarPreencher(element, tipoVillage);
         if (!retorno) {
             retorno = response;
@@ -76,20 +79,20 @@ $(document).ready(setInterval(function () {
     if (retorno) {
         $(".btn-recruit").click();
     }
-}, verificarTropas));
+}, verifyTroops));
 
 function validarPreencher(singleObject, village) {
-    if ("Ataque" == (village)) {
-        if (singleObject.recrutarAtt > 0) {
+    if ("attack" == (village)) {
+        if (singleObject.recruitAtt > 0) {
             if ($(singleObject.cssClassSelector).length <= 1) {
-                $("input[name=" + singleObject.nomeUnidade + "]").val(singleObject.recrutarAtt);
+                $("input[name=" + singleObject.unitName + "]").val(singleObject.recruitAtt);
                 return true;
             }
         }
-    } else if ("Defesa" == (village)) {
-        if (singleObject.recrutarDef > 0) {
+    } else if ("defense" == (village)) {
+        if (singleObject.recruitDef > 0) {
             if ($(singleObject.cssClassSelector).length <= 1) {
-                $("input[name=" + singleObject.nomeUnidade + "]").val(singleObject.recrutarDef);
+                $("input[name=" + singleObject.unitName + "]").val(singleObject.recruitDef);
                 return true;
             }
         }
@@ -97,13 +100,23 @@ function validarPreencher(singleObject, village) {
     return false;
 }
 
-function minAleatorio(inferior, superior) {
+function timeBetween(inferior, superior) {
     var numPosibilidades = (superior * 60 * 1000) - (inferior * 60 * 1000);
     var aleat = Math.random() * numPosibilidades;
     return Math.round(parseInt(inferior * 60 * 1000) + aleat);
 }
 
-geraTropas();
-console.log("Verificando tropas a cada " + (verificarTropas / 1000 / 60).toFixed(2) + " min.");
-console.log("Recarregar Pagina em: " + (recarregarPagina / 1000 / 60).toFixed(2) + " min.");
-setInterval(function () { location.reload(true); }, recarregarPagina);
+createTroops();
+function pular_aldeia() {
+    if ($(document).find("#village_switch_right").get()["0"]) {
+        jQuery.event.trigger({ type: 'keydown', which: 68 });
+    } else {
+        timeoutReload++;
+        if (timeoutReload == reloadPage) {
+            location.reload();
+            timeoutReload = 0;
+        }
+        setTimeout(pular_aldeia, 60000);
+    }
+}
+setTimeout(pular_aldeia, 60000);

@@ -58,11 +58,6 @@ for (i = 0; i < 100; i++) {
     });
 }
 function altAldeia() {
-    //$("#village_switch_right").click();
     document.getElementById('village_switch_right').click();
-    document.getElementById('village_switch_left').click();
-
-    //$('#village_switch_left').click();
-    //location.reload();
 }
 setInterval(altAldeia, altAldTempo);
