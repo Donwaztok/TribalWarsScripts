@@ -11,12 +11,12 @@
 
 // ======== Config ========
 //Time to: (min time, max time (in minutes))
-var verifyTroops = timeBetween(0.5, 1); // Min
-var reloadPage = timeBetween(5, 10); // Min
+var verifyTroops = timeBetween(0.1, 0.2); // Min
+var reloadPage = timeBetween(1, 2); // Min
 
 // Add the ID of village (found in URL /game.php?village=<****>&screen=overview) separeted by "," e.g.: ["0001", "0002"]
 var attack = ["9837", "16353", "9263"];
-var defense = ["9901", "1625", "2639", "5794"];
+var defense = ["9901", "1625", "2639", "5794","19419"];
 
 // How many troops to add in queue
 // 0 means that you dont want that troop
@@ -54,7 +54,7 @@ var classEnum = Object.freeze({
 $(document).ready(setInterval(function () {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const village = urlParams.get('village')
+    const village = urlParams.get('village').replace(/\D/g, '');
     var tipoVillage;
     if (attack.includes(village)) {
         console.log("Verificando Tropas [" + village + "] - attack");
