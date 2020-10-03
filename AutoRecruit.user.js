@@ -103,13 +103,3 @@ function timeBetween(inferior, superior) {
     var aleat = Math.random() * numPosibilidades;
     return Math.round(parseInt(inferior * 60 * 1000) + aleat);
 }
-
-createTroops();
-function pular_aldeia() {
-    if ($(document).find("#village_switch_right").get()["0"]) {
-        jQuery.event.trigger({ type: 'keydown', which: 68 });
-    } else {
-        location.reload();
-    }
-}
-setTimeout(pular_aldeia, reloadPage);
