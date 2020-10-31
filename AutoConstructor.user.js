@@ -3,7 +3,7 @@
 // @version             1.0
 // @description         Automatic build for villages
 // @author              Igor Martins
-// @include             http*://*.*game.php?village=*&screen=main
+// @include             http*://*.*game.php?*screen=main*
 // ==/UserScript==
 
 /*##############################################
