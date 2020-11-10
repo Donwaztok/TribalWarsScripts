@@ -3,10 +3,10 @@
 // @version      1.0
 // @description  Queue troops
 // @author       Igor Martins
-// @include     https://*&screen=train*
-// @include     https://*&screen=barracks*
-// @include     https://*&screen=stable*
-// @include     https://*&screen=garage*
+// @include     https://*screen=train*
+// @include     https://*screen=barracks*
+// @include     https://*screen=stable*
+// @include     https://*screen=garage*
 // ==/UserScript==
 
 // ======== Config ========
@@ -52,6 +52,7 @@ var classEnum = Object.freeze({
 });
 
 $(document).ready(setInterval(function () {
+    createTroops();
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const village = urlParams.get('village').replace(/\D/g, '');
