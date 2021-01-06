@@ -31,6 +31,7 @@ var archer = true;
 var light = false;
 var marcher = true;
 var heavy = true;
+var knight = false;
 // ============== Config ==============
 
 var timeoutReload = 0;
@@ -42,6 +43,7 @@ var Arqueiro = 3;
 var Cavalaria_leve = 4;
 var Arqueiro_a_cavalo = 5;
 var Cavalaria_pesada = 6;
+var Paladino = 7;
 
 var UNIT_INEX = 0;
 var Final = 1;
@@ -57,6 +59,7 @@ var Unidades_Coletando = [
     [Cavalaria_leve, "a.units-entry-all[data-unit='light']", light, 80, "input.unitsInput[name='light']"],
     [Arqueiro_a_cavalo, "a.units-entry-all[data-unit='marcher']", marcher, 50, "input.unitsInput[name='marcher']"],
     [Cavalaria_pesada, "a.units-entry-all[data-unit='heavy']", heavy, 50, "input.unitsInput[name='heavy']"],
+    [Paladino, "a.units-entry-all[data-unit='knight']", knight, 100, "input.unitsInput[name='knight']"],
 ];
 
 function mecanismo_inteligencia(el) {
