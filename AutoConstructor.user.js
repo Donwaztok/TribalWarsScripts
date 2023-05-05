@@ -35,7 +35,7 @@ setInterval(function () {
         tr.find('td').eq(2).find('a').eq(2).click();
     }
     //missao concluida
-    $('[class="btn btn-confirm-yes"]').click();
+    $('[class="btn btn-confirm-yes status-btn quest-complete-btn"]').click();
 }, 1000);
 
 let delay = Math.floor(Math.random() * (maxTime - minTime) + minTime);
