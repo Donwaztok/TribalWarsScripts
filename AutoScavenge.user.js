@@ -31,7 +31,7 @@ var archer = true;
 var light = false;
 var marcher = true;
 var heavy = true;
-var knight = false;
+var knight = true;
 // ============== Config ==============
 
 var timeoutReload = 0;
@@ -70,7 +70,7 @@ function mecanismo_inteligencia(el) {
     }
 }
 
-var tabela = $(document).find(".candidate-squad-widget.vis").get()[0];
+var tabela = ('[class="candidate-squad-widget vis"]');
 
 function calculadora(cap_index) {
     var unidades = []
@@ -98,6 +98,7 @@ function calculadora(cap_index) {
             }
         }
     }
+    console.log("Scavenge " + aperte);
     return aperte;
 }
 
@@ -111,7 +112,8 @@ function fill(aperte) {
         el.trigger('change');
     }
 }
-var botao = $(document).find(".btn.btn-default.free_send_button").get();
+
+var botao = document.getElementsByClassName('btn btn-default free_send_button'), i;
 
 const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
