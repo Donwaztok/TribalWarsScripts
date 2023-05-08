@@ -3,10 +3,8 @@
 // @version     1.0
 // @description  Farma utilizando o Assistente de Saque
 // @author       Igor Martins
-// @include     https://*&screen=am_farm*
+// @include     http*://*.*game.php?*screen=am_farm*
 // @require     https://code.jquery.com/jquery-2.2.4.min.js
-// @downloadURL https://raw.githubusercontent.com/victorgare/tribalwars/master/UserScript/FarmAssistenteSaque.user.js
-// @updateURL   https://github.com/victorgare/tribalwars/raw/master/UserScript/FarmAssistenteSaque.user.js
 // ==/UserScript==
 
 var atualizarPagina = 1;
