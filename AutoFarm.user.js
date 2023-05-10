@@ -43,7 +43,7 @@ if(usePresetB){
     });
 }
 
-if(usePresetA){
+if(usePresetC){
     var menuC = $('#am_widget_Farm a.farm_icon_c');
     menuC.each(function (button){
         if(!menuC[button].classList.contains("farm_icon_disabled")){
