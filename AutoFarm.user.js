@@ -22,6 +22,7 @@ function aleatorio(inferior, superior) {
 }
 
 if(usePresetA){
+    console.log("Farming: A Preset");
     var menuA = $('#am_widget_Farm a.farm_icon_a');
     menuA.each(function (button){
         if(!menuA[button].classList.contains("farm_icon_disabled")){
@@ -33,25 +34,31 @@ if(usePresetA){
 }
 
 if(usePresetB){
-    var menuB = $('#am_widget_Farm a.farm_icon_b');
-    menuB.each(function (button){
-        if(!menuB[button].classList.contains("farm_icon_disabled")){
-            setTimeout(function (){
-                menuB[button].click();
-            }, (1000 * button) + aleatorio(200, 1000), this)
-        }
-    });
+    setTimeout(function (){
+        console.log("Farming: B Preset");
+        var menuB = $('#am_widget_Farm a.farm_icon_b');
+        menuB.each(function (button){
+            if(!menuB[button].classList.contains("farm_icon_disabled")){
+                setTimeout(function (){
+                    menuB[button].click();
+                }, (1000 * button) + aleatorio(200, 1000), this)
+            }
+        });
+    }, aleatorio(20000, 30000));
 }
 
 if(usePresetC){
-    var menuC = $('#am_widget_Farm a.farm_icon_c');
-    menuC.each(function (button){
-        if(!menuC[button].classList.contains("farm_icon_disabled")){
-            setTimeout(function (){
-                menuC[button].click();
-            }, (1000 * button) + aleatorio(200, 1000), this)
-        }
-    });
+    setTimeout(function (){
+        console.log("Farming: C Preset");
+        var menuC = $('#am_widget_Farm a.farm_icon_c');
+        menuC.each(function (button){
+            if(!menuC[button].classList.contains("farm_icon_disabled")){
+                setTimeout(function (){
+                    menuC[button].click();
+                }, (1000 * button) + aleatorio(200, 1000), this)
+            }
+        });
+    }, aleatorio(50000, 60000));
 }
 
 function pular_aldeia() {
