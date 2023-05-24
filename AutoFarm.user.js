@@ -9,9 +9,10 @@
 
 // ===== Config =====
 var reloadPage = 10; // 10 min
+var moveVillage = false;
 
 var usePresetA = true;
-var usePresetB = true;
+var usePresetB = false;
 var usePresetC = false;
 // ===== Config =====
 
@@ -61,11 +62,11 @@ if(usePresetC){
     }, aleatorio(50000, 60000));
 }
 
-function pular_aldeia() {
-    if ($(document).find("#village_switch_right").get()["0"]) {
+function NextVillage() {
+    if ($(document).find("#village_switch_right").get()["0"] && moveVillage) {
         jQuery.event.trigger({ type: 'keydown', which: 68 });
     } else {
         location.reload();
     }
 }
-setTimeout(pular_aldeia, (60000 * reloadPage) + aleatorio(200, 60000));
+setTimeout(NextVillage, (60000 * reloadPage) + aleatorio(200, 60000));
