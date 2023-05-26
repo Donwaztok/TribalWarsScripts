@@ -10,7 +10,7 @@
 Based in
 https://forum.tribalwars.com.br/index.php?threads/os-5-primeiros-dias-modo-novato.334845/#post-3677800
 ##############################################*/
-const BuildMethods = {Ordered: 1, Resources: 2, Random: 3};
+const BuildMethods = {Ordered: 1, Resources: 2, Random: 3,};
 
 //*************************** Init Config ***************************//
 // Time between actions (em milissegundos)
@@ -20,9 +20,9 @@ const maxTime = 2500;
 const reloadPage = 10;
 // move to new village?
 const moveVillage = true;
-// BuildMethods.Ordered: Build in order,
-// BuildMethods.Resources: Build first with resources available,
-// BuildMethods.Random: build in a random order,
+// Ordered: Build in order,
+// Resources: Build first with resources available,
+// Random: build in a random order,
 const buildingMethod = BuildMethods.Ordered;
 //*************************** End Config ***************************//
 
@@ -36,7 +36,7 @@ setInterval(function () {
         console.log("Completar Grátis");
         tr.find('td').eq(2).find('a').eq(2).click();
     }
-    // Finish Missions
+    //missao concluida
     $('[class="btn btn-confirm-yes status-btn quest-complete-btn"]').click();
 }, 1000);
 
@@ -58,6 +58,7 @@ function GetNextBuilding() {
     while (nextBuildingButton === undefined && buildingsList.length > 0) {
         var next = buildingsList.shift();
         if (buttons.hasOwnProperty(next)) {
+            console.log("Trying to upgrade " + next);
             let nextBuilding = document.getElementById(next);
             var enabled = nextBuilding.offsetWidth > 0 || nextBuilding.offsetHeight > 0;
             if (enabled) {
