@@ -102,6 +102,7 @@ function GetNextBuildingList() {
     buildingList.push("main_buildlink_iron_3");
     buildingList.push("main_buildlink_main_4");
     buildingList.push("main_buildlink_main_5");
+    buildingList.push("main_buildlink_storage_4");
     buildingList.push("main_buildlink_smith_1");
     buildingList.push("main_buildlink_wood_4");
     buildingList.push("main_buildlink_stone_4");
@@ -110,6 +111,7 @@ function GetNextBuildingList() {
     buildingList.push("main_buildlink_hide_3");
     buildingList.push("main_buildlink_wood_5");
     buildingList.push("main_buildlink_stone_5");
+    buildingList.push("main_buildlink_storage_5");
     buildingList.push("main_buildlink_market_1");
     buildingList.push("main_buildlink_wood_6");
     buildingList.push("main_buildlink_stone_6");
@@ -118,6 +120,7 @@ function GetNextBuildingList() {
     buildingList.push("main_buildlink_iron_4");
     buildingList.push("main_buildlink_iron_5");
     buildingList.push("main_buildlink_iron_6");
+    buildingList.push("main_buildlink_storage_6");
     buildingList.push("main_buildlink_wood_8");
     buildingList.push("main_buildlink_stone_8");
     buildingList.push("main_buildlink_iron_7");
