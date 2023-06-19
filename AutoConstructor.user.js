@@ -13,7 +13,7 @@ https://forum.tribalwars.com.br/index.php?threads/os-5-primeiros-dias-modo-novat
 const BuildMethods = {Ordered: 1, Resources: 2, Random: 3};
 
 //*************************** Init Config ***************************//
-// Time between actions (em milissegundos)
+// Time between actions (milliseconds)
 const minTime = 800;
 const maxTime = 2500;
 // Change the current village or reload page (in minutes)
